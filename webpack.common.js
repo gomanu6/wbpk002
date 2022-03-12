@@ -4,6 +4,7 @@ const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
+const TerserPlugin = require('terser-webpack-plugin')
 // const { config } = require('process');
 
 
@@ -52,6 +53,26 @@ const config = {
                         'postcss-loader' ]
             },
 
+            {
+                test: /\.js$/i,
+                exclude: /node_modules/,
+                use: {
+                    loader: 'babel-loader'
+                }
+            },
+
+            {
+                test: /\.(png|svg|gif|jpe?g)$/i,
+                use: {
+                    loader: 'file-loader',
+                    options: {
+                        name: "[name].[hash].[ext]",
+                        outputPath: 'assets/images',
+                        esModule: false,
+                    }
+                }
+            },
+
         ]
     },
 
@@ -61,6 +82,7 @@ const config = {
         },
         minimizer: [
             new CssMinimizerPlugin,
+            new TerserPlugin
 
         ]
     },

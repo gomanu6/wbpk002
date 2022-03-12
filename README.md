@@ -24,3 +24,9 @@ Minimize
 css-minimizer-webpack-plugin
 
 
+
+JS
+
+babel-loader
+@babel-core
+@babel/preset-env
